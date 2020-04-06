@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,5 +25,10 @@ public class CharacterController {
 		return "home";
 	}
 
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search(Map<String, Object> model,@ModelAttribute("searchFilter") SearchCharacterFilter filter) {
+		model.put("characters", characterService.search(filter));
+		return "home";
+	}
 	
 }
