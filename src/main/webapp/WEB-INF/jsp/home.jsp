@@ -3,54 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<c:url value="/css/main.css" var="mainCss" />
-<link href="${mainCss}" rel="stylesheet" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 	<script
+ <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+ <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
- <script>
-  $( function() {
-	  var availableCharacters=[];
-	 
-	  $.ajax({
-		   type:'GET',
-		   url :"/character/list", 
-		   headers: {'Access-Control-Allow-Origin': '*',
-		   'Access-Control-Allow-Methods': '*',
-		   'Access-Control-Allow-Headers': 'api-key,content-type',
-		   'Access-Control-Allow-Credentials': true},
-		   success: function(data) {
-			   availableCharacters = data;
-		       
-		       
-		   },
-		   error:function(exception){alert('Exeption:'+exception);}
-		}); 
+<c:url value="/css/main.css" var="mainCss" />
+<c:url value="/js/main.js" var="mainJs" />
+<link href="${mainCss}" rel="stylesheet" />
+<script type="text/javascript" src="${mainJs}"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    $( "#searchInput" ).autocomplete({
-      source: function (request, response) {
-          //data :: JSON list defined
-         
-          response($.map(availableCharacters, function (value, key) {
-               return {
-                   label: value.firstName + " " + value.lastName,
-                   value: value.firstName + " " + value.lastName,
-                   id: value._id
-               }
-           }));
 
-   },
-    });
-  } );
-  </script>
+
 </head>
 <body>
 
@@ -68,41 +38,32 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
+					<li class="nav-item active"><a class="nav-link" href="/home">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Show all character</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Dropdown </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+					<li class="nav-item">
+					<div id="showAllDiv">
+						<a class="nav-link" id="showAll" href="/character/list">Show all character</a>
+					</div>
+					
+					</li>
+				
+					<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="false" aria-controls="collapseSearch">Search..</a>
 					</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" id="searchInput"
-						placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
+				
 			</div>
 		</nav>
-		<div id="result">
+		<div class="collapse" id="collapseSearch">
+			<jsp:include page="search.jsp" />
+		</div>
+		<c:if test = "${characters.size() > 0}">
+		<div id="result" >
 		
- 
-		<c:forEach var="simpsonCharacter" items="${characters}">
- 
-			  <img src="${simpsonCharacter.picture}" class="img-fluid" alt="Responsive image">
-			 
-		</c:forEach>
-		
+ 			<jsp:include page="result.jsp" />
 		
 		</div>
+		</c:if>
 	</div>
 
 	
