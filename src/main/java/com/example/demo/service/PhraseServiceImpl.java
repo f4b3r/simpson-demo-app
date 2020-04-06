@@ -21,6 +21,18 @@ public class PhraseServiceImpl implements PhraseService{
 	}
 
 
+	@Override
+	public Phrase findById(String id) {
+		return 	phraseRepository.findById(id).get();
+	}
+
+
+	@Override
+	public Iterable<Phrase> findByCharacterId(String id) {
+		return phraseRepository.findByCharacterId(id);
+	}
+
+
 
 
 }
