@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:url value="/character/search" var="searchCharacterUrl" />
-
+	<div id = "searchFilterDiv">
 	<form:form class="form-horizontal" method="post" 
                 modelAttribute="searchFilter" action="${searchCharacterUrl}">
 	<div class="form-group row">
@@ -41,4 +41,5 @@
 		</div>
 	</div>
 </form:form>
+</div>
 
