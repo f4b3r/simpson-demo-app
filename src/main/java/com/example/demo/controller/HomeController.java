@@ -12,7 +12,9 @@ import com.example.demo.domain.SimpsonCharacter;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/home")
+	 @RequestMapping(value = {
+		        "",
+		        "/home"  })
 	public String home(Map<String, Object> model) {
 		model.put("characters", new ArrayList<SimpsonCharacter>());
 		model.put("searchFilter", new SearchCharacterFilter());

@@ -15,5 +15,7 @@ public interface CharacterService {
 	public SimpsonCharacter save(SimpsonCharacter character);
 	
 	public Iterable<SimpsonCharacter> search(SearchCharacterFilter filter);
+
+	public void delete(String id);
 	
 }

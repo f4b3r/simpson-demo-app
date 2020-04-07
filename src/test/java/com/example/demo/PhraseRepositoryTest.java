@@ -15,7 +15,7 @@ import com.example.demo.service.CharacterService;
 import com.example.demo.service.PhraseService;
 
 @SpringBootTest
-public class PhraseControllerTest {
+public class PhraseRepositoryTest {
 
 	@Autowired
 	private PhraseService service;

@@ -36,6 +36,12 @@ public class CharacterServiceImpl implements CharacterService {
 		
 	}
 
+	@Override
+	public void delete(String id) throws IllegalArgumentException{
+		characterRepository.deleteById(id);
+		
+	}
+
 	
 
 }

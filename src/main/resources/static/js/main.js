@@ -18,3 +18,10 @@ $(document).on('show.bs.modal', '#detailCharacterModal', function(e) {
 $(function() {
 	$('[data-toggle="popover"]').popover()
 })
+function deleteCharacter(id) {
+	$.get('/character/delete/' + id,function(data) {
+		location.reload();
+	});
+	
+	
+}
