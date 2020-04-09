@@ -12,4 +12,5 @@ public interface PhraseService {
 
 	public Iterable<Phrase> findByCharacterId(String id);
 
+	public void save(Phrase phrase) throws IllegalArgumentException;
 }

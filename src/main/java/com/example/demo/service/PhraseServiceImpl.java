@@ -33,6 +33,12 @@ public class PhraseServiceImpl implements PhraseService{
 	}
 
 
+	@Override
+	public void save(Phrase phrase) throws IllegalArgumentException{
+		phraseRepository.save(phrase);		
+	}
+
+
 
 
 }

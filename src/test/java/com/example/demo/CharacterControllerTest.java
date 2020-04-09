@@ -2,6 +2,7 @@ package com.example.demo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -15,14 +16,12 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class CharacterControllerTest {
 
-	@Autowired 
+	@Autowired
 	private MockMvc mockMvc;
-	
-	 @Test
-	  public void testErrorPageForwardOnDelete() throws Exception {
-	   
-	   
-	   this.mockMvc.perform(get("/character/delete/null")).andDo(print()).andExpect(status().is5xxServerError())
-		.andExpect(view().name("/error"));
+
+	@Test
+	public void testErrorStatusOnDelete() throws Exception {
+
+		this.mockMvc.perform(get("/character/delete/aaaaaa")).andDo(print()).andExpect(status().is5xxServerError());
 	}
 }
